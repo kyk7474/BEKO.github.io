@@ -1,56 +1,58 @@
-package com.example.firstproblem;
+package com.example.sms;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ImageView;
-
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView topImage, bottomImage;
-    BitmapDrawable bitmap;
-
-    static int imageSwitch = 1;
+    Button sendButton;
+    EditText smsInput;
+    TextView byteView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        topImage = (ImageView)findViewById(R.id.topImage);
-        bottomImage = (ImageView)findViewById(R.id.bottomImage);
+        sendButton = (Button)findViewById(R.id.sendButton);
+        smsInput = (EditText)findViewById(R.id.smsInput);
+        byteView = (TextView)findViewById(R.id.byteView);
 
-        Resources res = getResources();
-        bitmap = (BitmapDrawable)res.getDrawable(R.drawable.image01);
+        smsInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        setImage(null, topImage);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                bytesCounters(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
-    public void setImage(ImageView oldImageView, ImageView newImageView){
-        if(oldImageView != null) {
-            oldImageView.setImageDrawable(null);
-        }
-        newImageView.setImageDrawable(bitmap);
-        newImageView.getLayoutParams().width = bitmap.getIntrinsicWidth();
-        newImageView.getLayoutParams().height = bitmap.getIntrinsicHeight();
+    public void bytesCounters(CharSequence s){
+        byteView.setText(""+ s.toString().getBytes().length + " / 80 바이트");
     }
 
-    public void onDownButtonClicked(View v) {
-        if(imageSwitch == 1){
-            setImage(topImage, bottomImage);
-            imageSwitch = 2;
-        }
+    public void onSendButtonClicked(View v){
+        String message = smsInput.getText().toString();
+        showToast(message);
     }
 
-    public void onUpButtonClicked(View v) {
-        if(imageSwitch == 2){
-            setImage(bottomImage, topImage);
-            imageSwitch = 1;
-        }
+    public void showToast(String str){
+        Toast.makeText(getApplicationContext(),str, Toast.LENGTH_LONG).show();
     }
 }

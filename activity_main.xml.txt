@@ -1,73 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <HorizontalScrollView
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+    
+    <EditText
+        android:id="@+id/smsInput"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#ffff0000"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/topImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-
-    </HorizontalScrollView>
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="50dp"
+        android:text="한글여덟글자한줄"
+        android:inputType="textMultiLine"/>
+    
+    <TextView
+        android:id="@+id/byteView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0 / 80 바이트"
+        android:gravity="right"
+        android:textSize="20dp"
+        android:textColor="@color/colorAccent"
+        />
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout"
-        android:background="#ff00ff00"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center" >
-        <Button
-            android:id="@+id/downButton"
-            android:text="Down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onDownButtonClicked" />
+        android:gravity="center">
 
         <Button
-            android:id="@+id/upButton"
-            android:text="Up"
-            android:layout_width="wrap_content"
+            android:id="@+id/sendButton"
+            android:text="전송"
             android:layout_height="wrap_content"
-            android:onClick="onUpButtonClicked" />
+            android:layout_width="wrap_content"
+            android:onClick="onSendButtonClicked"
+             />
 
+        <Button
+            android:id="@+id/closeButton"
+            android:text="닫기"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
     </LinearLayout>
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:background="#ff0000ff">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/bottomImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </ScrollView>
-
-    </HorizontalScrollView>
-</RelativeLayout>
+    
+    </LinearLayout>
